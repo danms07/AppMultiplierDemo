@@ -1,0 +1,2 @@
+rootProject.name='AppMultiplierDemo'
+include ':app'
