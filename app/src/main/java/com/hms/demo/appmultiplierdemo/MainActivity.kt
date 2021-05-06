@@ -73,4 +73,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,DestroyEventRecei
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
     }
+
+    override fun onDestroy() {
+        receiver?.unregister(this)
+        super.onDestroy()
+    }
 }
