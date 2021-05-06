@@ -9,4 +9,9 @@ class RedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_red)
     }
+
+    override fun onDestroy() {
+        BroadcastUtils.sendDestroyNotification(this)
+        super.onDestroy()
+    }
 }

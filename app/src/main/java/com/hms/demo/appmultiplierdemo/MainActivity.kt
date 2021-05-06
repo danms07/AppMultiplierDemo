@@ -10,7 +10,8 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener,DestroyEventReceiver.OnDestroyEventListener {
+    private var receiver:DestroyEventReceiver?=null
 
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +33,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         //Force to show in full screen
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-
+        //Register a receiver to be notified when another activity is destroyed
+        receiver=DestroyEventReceiver().apply {
+            onDestroyEventListener=this@MainActivity
+            register(this@MainActivity)
+        }
         //Back to split view
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     }
@@ -59,14 +64,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         startActivity(intent)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+    }
+
+    override fun onActivityDestroyed() {
         if(isTaskRoot){
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
         }
-    }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
     }
 }

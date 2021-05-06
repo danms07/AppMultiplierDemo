@@ -9,4 +9,9 @@ class GreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_green)
     }
+
+    override fun onDestroy() {
+        BroadcastUtils.sendDestroyNotification(this)
+        super.onDestroy()
+    }
 }

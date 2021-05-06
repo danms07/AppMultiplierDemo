@@ -9,4 +9,9 @@ class BlueActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_blue)
     }
+
+    override fun onDestroy() {
+        BroadcastUtils.sendDestroyNotification(this)
+        super.onDestroy()
+    }
 }
