@@ -18,7 +18,9 @@
             android:label="@string/green_activity"/>
         <activity android:name=".RedActivity"
             android:label="@string/red_activity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTask"
+            android:configChanges="screenSize|screenLayout|orientation|smallestScreenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
